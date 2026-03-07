@@ -1,0 +1,260 @@
+/* Global styles and variables */
+:root{--bg:#F3EFE6;--accent:#6C8A3D;--card:#FFFFFF;--muted:#6b6b6b;--text:#10210f}
+
+*{box-sizing:border-box}
+
+html,body{
+height:100%;
+margin:0;
+font-family:Poppins,Inter,Segoe UI,Arial,sans-serif;
+background:var(--bg);
+color:var(--text);
+-webkit-font-smoothing:antialiased
+}
+
+/* Container spacing reduced */
+.container{
+max-width:1100px;
+margin:8px auto;
+padding:0 20px
+}
+
+/* NAVBAR */
+.nav{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:10px 20px;
+background:white;
+border-radius:10px;
+box-shadow:0 6px 18px rgba(16,33,15,0.06);
+margin:6px 0
+}
+
+.nav-left{display:flex;align-items:center;gap:12px}
+
+.logo-mark{
+width:44px;
+height:44px;
+border-radius:8px;
+background:linear-gradient(180deg,var(--accent),#4f6b2f);
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:700
+}
+
+.brand{font-weight:700;font-size:18px}
+
+.nav-center{display:flex;gap:18px}
+
+.nav-link{
+color:var(--muted);
+text-decoration:none;
+font-weight:600
+}
+
+.btn{
+padding:10px 14px;
+border-radius:8px;
+border:none;
+background:var(--accent);
+color:white;
+font-weight:600;
+cursor:pointer
+}
+
+.btn.logout{background:var(--accent)}
+
+/* HERO (reduced spacing) */
+.hero{
+text-align:left;
+padding:12px 0
+}
+
+.hero h1{
+font-size:34px;
+margin:0 0 6px
+}
+
+.subtitle{
+color:var(--muted);
+margin-bottom:10px
+}
+
+.search{
+display:flex;
+gap:10px;
+max-width:640px
+}
+
+.search input{
+flex:1;
+padding:12px;
+border-radius:8px;
+border:1px solid rgba(16,33,15,0.06)
+}
+
+.search .search-btn{background:var(--accent)}
+
+/* Section spacing reduced */
+.section{
+margin-top:14px
+}
+
+/* Categories */
+.categories{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:16px;
+margin-top:6px
+}
+
+.cat-card{
+background:var(--card);
+border-radius:12px;
+padding:16px;
+text-align:center;
+box-shadow:0 6px 18px rgba(16,33,15,0.06);
+transition:transform .18s ease,box-shadow .18s ease
+}
+
+.cat-card:hover{
+transform:translateY(-6px);
+box-shadow:0 10px 24px rgba(16,33,15,0.08)
+}
+
+.cat-icon{
+width:42px;
+height:42px;
+margin:6px auto 10px;
+display:block
+}
+
+.cat-name{font-weight:600}
+
+/* Workers (UNCHANGED as requested) */
+.workers{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:18px;
+margin-top:8px
+}
+
+.worker-card{
+background:var(--card);
+border-radius:15px;
+padding:14px;
+text-align:center;
+box-shadow:0 6px 18px rgba(16,33,15,0.06);
+transition:transform .18s ease,box-shadow .18s ease
+}
+
+.worker-card:hover{
+transform:translateY(-8px);
+box-shadow:0 12px 30px rgba(16,33,15,0.1)
+}
+
+.worker-photo{
+width:100%;
+height:200px;
+object-fit:cover;
+border-radius:8px;
+margin-bottom:10px
+}
+
+.worker-name{margin:6px 0 4px;font-size:16px}
+
+.meta{color:var(--muted);font-size:13px}
+
+.location{margin-top:6px;color:var(--muted);font-size:13px}
+
+.rating{margin-top:8px;font-weight:600}
+
+.btn.view{margin-top:10px;background:var(--accent)}
+
+/* Responsive */
+@media (max-width:1000px){
+.workers{grid-template-columns:repeat(3,1fr)}
+.categories{grid-template-columns:repeat(2,1fr)}
+}
+
+@media (max-width:600px){
+.workers{grid-template-columns:1fr}
+.categories{grid-template-columns:1fr}
+.hero h1{font-size:28px}
+}
+
+/* Utility */
+.muted{color:var(--muted)}
+
+/* accessibility tweaks */
+.cat-card:focus,
+.worker-card:focus{
+outline:2px solid rgba(108,138,61,0.18)
+}
+
+/* ensure nav links center on small screens */
+@media (max-width:720px){
+.nav-center{display:none}
+}
+
+/* background override */
+html,body{
+background-image:none !important;
+background-color:var(--bg) !important
+}
+
+body::before{
+display:none !important;
+content:none !important
+}
+
+/* FOOTER */
+.site-footer{
+margin-top:18px;
+padding:16px 0 28px;
+background:transparent
+}
+
+.footer-inner{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+max-width:1100px;
+margin:0 auto;
+padding:0 20px
+}
+
+.site-footer .copyright{
+color:var(--muted);
+font-size:14px
+}
+
+.site-footer .social{
+display:flex;
+gap:12px
+}
+
+.social-link{
+color:var(--muted);
+text-decoration:none;
+padding:8px 10px;
+border-radius:8px;
+transition:background .12s ease,color .12s ease
+}
+
+.social-link:hover{
+background:rgba(108,138,61,0.08);
+color:var(--text)
+}
+
+@media (max-width:640px){
+.footer-inner{
+flex-direction:column;
+gap:8px;
+text-align:center
+}
+}

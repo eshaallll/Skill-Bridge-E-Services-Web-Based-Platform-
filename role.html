@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SkillBridge — Choose Your Role</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="role.css">
+</head>
+<body>
+
+  <header class="site-nav role-nav">
+    <div class="brand">SkillBridge</div>
+    <nav class="nav-links">
+      <a href="home.html">Home</a>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="index.html" class="logout">Logout</a>
+    </nav>
+  </header>
+
+  <main class="role-wrap">
+    <div class="role-card">
+      <h1>Choose Your Role</h1>
+      <p class="subtitle">How would you like to use SkillBridge today?</p>
+
+      <div class="role-options">
+        <div class="option" id="role-worker" tabindex="0" role="button" aria-pressed="false">
+          <!-- worker icon -->
+          <svg class="role-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2c1.1 0 2 .9 2 2v1h2a2 2 0 012 2v2h-2v6h-8V9H6V7a2 2 0 012-2h2V4c0-1.1.9-2 2-2z" fill="#6C8A3D" opacity="0.95"/>
+          </svg>
+          <h3>Worker</h3>
+          <p class="description">Offer services such as plumbing, carpentry, electrical work, or mechanics.</p>
+          <button class="btn select" data-role="worker">Continue as Worker</button>
+        </div>
+
+        <div class="option" id="role-customer" tabindex="0" role="button" aria-pressed="false">
+          <!-- customer icon -->
+          <svg class="role-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 12a4 4 0 100-8 4 4 0 000 8zm0 2c-3.3 0-6 1.7-6 3.8V20h12v-2.2c0-2.1-2.7-3.8-6-3.8z" fill="#6C8A3D" opacity="0.95"/>
+          </svg>
+          <h3>Customer</h3>
+          <p class="description">Hire skilled workers for home repairs, installations, and more.</p>
+          <button class="btn select" data-role="customer">Continue as Customer</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    // simple role selection handler
+    document.addEventListener('click', function (e) {
+      const btn = e.target.closest('.select');
+      if (!btn) return;
+      const role = btn.getAttribute('data-role');
+      try { localStorage.setItem('sb_role', role); } catch (err) {}
+      // redirect to home (or appropriate dashboard)
+      if (role === 'worker') window.location.href = 'worker-dashboard.html';
+      else window.location.href = 'home.html';
+    });
+
+    // keyboard support for option cards
+    document.querySelectorAll('.option').forEach(function (card) {
+      card.addEventListener('keydown', function (ev) {
+        if (ev.key === 'Enter' || ev.key === ' ') {
+          const btn = card.querySelector('.select');
+          btn.click();
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

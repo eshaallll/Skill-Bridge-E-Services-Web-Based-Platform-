@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>SkillBridge — Login / Signup</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+</header>
+
+	<!-- Split-screen login layout: left = image, right = login panel -->
+	<main class="split">
+		<div class="left-panel" aria-hidden="true">
+			<!-- Static background image: set `images/tools.jpg` in the images folder -->
+		</div>
+
+		<div class="right-panel">
+			<div class="login-card" role="region" aria-labelledby="welcome-heading">
+				<div class="tab-buttons" role="tablist">
+					<button id="tab-login" class="active" role="tab" aria-selected="true">Login</button>
+					<button id="tab-signup" role="tab" aria-selected="false">Sign Up</button>
+				</div>
+
+				<h1 id="welcome-heading">Welcome Back</h1>
+				<p class="muted">Please enter your details</p>
+
+				<form id="login-form" novalidate>
+					<label class="label" for="email">E-mail</label>
+					<input id="email" type="email" name="email" placeholder="Enter your e-mail" autocomplete="username" required>
+					<div class="error" id="email-error" aria-live="polite"></div>
+
+					<label class="label" for="password">Password</label>
+					<input id="password" type="password" name="password" placeholder="Enter your password" autocomplete="current-password" required minlength="6">
+					<div class="error" id="password-error" aria-live="polite"></div>
+
+					<div class="row" style="margin-top:10px;align-items:center">
+						<label class="remember"><input id="remember" type="checkbox"> Remember me</label>
+						<a class="forgot" href="#">Forgot your password?</a>
+					</div>
+
+					<button id="submit" type="submit" class="btn dark">Log in</button>
+				</form>
+
+				<form id="signup-form" class="form-hidden" novalidate>
+					<label class="label" for="fullname">Full Name</label>
+					<input id="fullname" type="text" placeholder="Your full name" required>
+
+					<label class="label" for="signup-email">E-mail</label>
+					<input id="signup-email" type="email" placeholder="Enter your e-mail" required>
+
+					<label class="label" for="signup-pass">Password</label>
+					<input id="signup-pass" type="password" placeholder="Choose a password" minlength="6" required>
+
+					<p class="terms">By signing up you agree to our Terms and Privacy Policy.</p>
+					<button id="signup" type="button" class="btn dark">Sign Up</button>
+				</form>
+
+				<p class="muted" style="margin-top:12px">Don't have an account? Use the <strong>Sign Up</strong> tab above.</p>
+			</div>
+		</div>
+	</main>
+
+	<script src="script.js"></script>
+
+	<!-- Branding: user-provided logo.svg placed in tools/logo.svg -->
+	<div class="branding" aria-hidden="true">
+		<img src="images/logo.svg" alt="SkillBridge logo">
+	</div>
+</body>
+</html>

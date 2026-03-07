@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Skill Bridge — Workers</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-nav">
+    <div class="brand"><a href="home.html">← Back</a></div>
+    <div class="links"><a href="index.html">Sign In</a></div>
+  </header>
+
+  <main class="wrap">
+    <section class="card" style="max-width:1100px;width:100%;">
+      <div class="layout">
+        <aside class="filters">
+          <h3>Filters</h3>
+          <div>
+            <label><input type="checkbox" checked> Plumbing</label>
+          </div>
+          <div style="margin-top:8px">
+            <label>Location</label>
+            <select><option>All</option><option>City A</option><option>City B</option></select>
+          </div>
+          <div style="margin-top:8px">
+            <label>Sort</label>
+            <select><option>Rating</option><option>Experience</option><option>Newest</option></select>
+          </div>
+          <div style="margin-top:10px"><button class="btn">Clear Filters</button></div>
+        </aside>
+
+        <div>
+          <h1 id="listing-title" class="title">Available workers</h1>
+          <div id="workers-list" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
