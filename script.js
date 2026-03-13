@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // restore remembered email
   try { const saved = localStorage.getItem('savedEmail'); if (saved) { emailInput.value = saved; remember.checked = true; } } catch (e) {}
 
-  function setMessage(text, ok) { msg.textContent = text; msg.style.color = ok ? '#10B981' : '#EF4444'; }
+  function setMessage(text, ok) { msg.textContent = text; msg.style.color = ok ? '#6C8A3D' : '#EF4444'; }
   function clearErrors() { emailErr.textContent = ''; passErr.textContent = ''; setMessage('', true); }
 
   function validate() {
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
     setMessage('Signed in successfully — redirecting...', true);
     if (remember.checked) { try { localStorage.setItem('savedEmail', email); } catch (e) {} }
     else { try { localStorage.removeItem('savedEmail'); } catch (e) {} }
-    setTimeout(function () { setMessage('Welcome!', true); submitBtn.disabled = false; }, 800);
+    setTimeout(function () { location.href = 'role.html'; }, 800);
   }
 
   // signup handling (basic localStorage stub)

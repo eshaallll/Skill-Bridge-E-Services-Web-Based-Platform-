@@ -13,8 +13,8 @@ function cardHTML(w){
       </div>
     </div>
     <div style="display:flex;gap:8px;margin-top:12px">
-      <a class="btn" href="profile.html?worker=${w.id}">View Profile</a>
-      <a class="btn" href="booking.html?worker=${w.id}">Book Now</a>
+      <a class="btn outline" href="profile.html?worker=${w.id}">View Profile</a>
+      <a class="btn gradient" href="booking.html?worker=${w.id}">Book Now</a>
     </div>
   </div>`
 }

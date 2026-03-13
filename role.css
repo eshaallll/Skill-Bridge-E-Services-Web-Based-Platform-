@@ -1,7 +1,7 @@
 /* Role selection page styles (complements existing `style.css`) */
 :root{--bg:#F3EFE6;--accent:#6C8A3D;--card:#FCF4D7;--muted:#6b6b6b;--text:#10210f}
 *{box-sizing:border-box}
-body{font-family:Poppins,Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);margin:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);margin:0}
 .site-nav.role-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;background:transparent;box-shadow:none}
 .site-nav.role-nav .brand{font-weight:700;font-size:18px}
 .nav-links{display:flex;gap:14px;align-items:center}
@@ -19,6 +19,6 @@ body{font-family:Poppins,Inter,Segoe UI,Arial,sans-serif;background:var(--bg);co
 .role-icon{width:72px;height:72px;margin-bottom:12px}
 .option h3{margin:8px 0}
 .description{color:var(--muted);font-size:14px;margin-bottom:18px}
-.btn.select{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;border:none;font-weight:600;cursor:pointer}
+.btn.select{margin-top:auto}
 
 @media (max-width:860px){.role-options{flex-direction:column}.option{max-width:100%}}
