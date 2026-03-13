@@ -129,7 +129,8 @@
                 <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:8px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
                 <p style="margin:0;font-size:14px;color:var(--text)">Click to browse or drag and drop</p>
                 <p class="muted" style="margin:4px 0 0;font-size:12px">JPG, PNG or PDF (Max 5MB)</p>
-                <input type="file" id="id-upload" style="display:none" accept="image/*,.pdf" required>
+                <!-- TODO (Backend Integration): Re-add 'required' attribute here once custom JS file validation is implemented -->
+                <input type="file" id="id-upload" style="display:none" accept="image/*,.pdf">
               </div>
             </div>
 
@@ -137,7 +138,8 @@
               <label class="input-label">Profile Photo (Professional)</label>
               <div class="upload-box" onclick="document.getElementById('photo-upload').click()" style="padding:16px">
                 <p style="margin:0;font-size:14px">Upload Profile Photo</p>
-                <input type="file" id="photo-upload" style="display:none" accept="image/*" required>
+                <!-- TODO (Backend Integration): Re-add 'required' attribute here once custom JS file validation is implemented -->
+                <input type="file" id="photo-upload" style="display:none" accept="image/*">
               </div>
             </div>
 

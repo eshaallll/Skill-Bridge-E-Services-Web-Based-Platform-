@@ -45,5 +45,8 @@ Because this is a static frontend prototype, no build steps are required.
    ```
    Then navigate to `http://localhost:8000/index.html`
 
+## 📝 Backend Integration Notes
+- **Worker Signup Validations:** The custom styled file upload fields in `worker-signup.html` currently have their native HTML `required` attributes removed. This was done to prevent hidden native inputs from silently failing prototype form submission. When attaching a backend framework, you must implement custom JS validation to check for the presence of files and re-enforce restriction on these specific uploads.
+
 ## 🎨 Design Philosophy
 The design language focuses on **Trust, Quality, and Usability**. We utilize a nature-inspired green primary color (`#6C8A3D`) to evoke growth and reliability, paired with significant whitespace, modern typography, and interactive depth (shadows/scaling) to ensure the platform feels like a premium consumer product.

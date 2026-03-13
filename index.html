@@ -50,6 +50,21 @@
             <div class="error" id="password-error"></div>
           </div>
 
+          <!-- Role Selection -->
+          <div style="margin-bottom:24px">
+            <label style="display:block;margin-bottom:12px;font-size:14px;font-weight:600">I am a:</label>
+            <div style="display:flex;gap:16px">
+              <label style="flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border:1px solid var(--border);border-radius:12px;cursor:pointer;background:#fff;transition:border-color 0.2s">
+                <input type="radio" name="login_role" value="customer" checked style="accent-color:var(--primary)">
+                Customer
+              </label>
+              <label style="flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border:1px solid var(--border);border-radius:12px;cursor:pointer;background:#fff;transition:border-color 0.2s">
+                <input type="radio" name="login_role" value="worker" style="accent-color:var(--primary)">
+                Worker
+              </label>
+            </div>
+          </div>
+
           <!-- Options Row -->
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
             <label style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);cursor:pointer">
@@ -65,7 +80,7 @@
 
         <p style="text-align:center;margin-top:24px;color:var(--muted);font-size:15px">
           Don't have an account? 
-          <a href="role-selection.html" style="color:var(--primary);font-weight:600;text-decoration:none">Sign Up</a>
+          <a href="#" id="signup-link" style="color:var(--primary);font-weight:600;text-decoration:none">Sign Up</a>
         </p>
 
       </div>
@@ -88,18 +103,37 @@
       }
     });
 
+    // Handle Routing based on Role
+    const signupLink = document.getElementById('signup-link');
+    const roleRadios = document.querySelectorAll('input[name="login_role"]');
+
+    function updateSignupLink() {
+      const selectedRole = document.querySelector('input[name="login_role"]:checked').value;
+      if(selectedRole === 'worker') {
+        signupLink.href = 'worker-signup.html';
+      } else {
+        signupLink.href = 'customer-signup.html';
+      }
+    }
+
+    // Attach to radio click
+    roleRadios.forEach(r => r.addEventListener('change', updateSignupLink));
+    // Run once on load
+    updateSignupLink();
+
     // Handle Login
     document.getElementById('login-form').addEventListener('submit', (e) => {
       e.preventDefault();
-      const email = document.getElementById('email').value.toLowerCase();
       
-      // Basic Mock Routing Demo:
-      // If the email includes 'worker', route to worker dashboard, else customer dashboard.
-      // (Replacing the old role.html intermediate step post-signup).
-      if(email.includes('worker')) {
+      const selectedRole = document.querySelector('input[name="login_role"]:checked').value;
+      
+      // Save role temporarily to localStorage to simulate auth backend
+      localStorage.setItem('userRole', selectedRole);
+      
+      if(selectedRole === 'worker') {
         location.href = 'worker-dashboard.html';
       } else {
-        location.href = 'home.html';
+        location.href = 'customer-dashboard.html';
       }
     });
   </script>

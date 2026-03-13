@@ -17,7 +17,7 @@ if(custForm) {
     }
     
     // Success -> redirect to customer home
-    location.href = 'home.html';
+    location.href = 'customer-dashboard.html';
   });
 }
 
