@@ -24,7 +24,7 @@
   // FULL FOOTER (Public pages)
   // -------------------------------------------------------
   const fullFooter = `
-    <footer class="sb-footer-full">
+    <footer class="sb-footer-full" id="sb-footer">
       <div class="sb-footer-inner">
 
         <!-- Brand Column -->

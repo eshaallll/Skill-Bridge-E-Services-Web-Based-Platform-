@@ -3,7 +3,7 @@ function q(name){return new URLSearchParams(location.search).get(name)}
 
 function cardHTML(w){
   const photo = w.photo || 'images/hasnain.jpeg';
-  return `<div class="worker-card" style="background:#fff; padding:16px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.04); text-align:center; transition:transform 0.2s;">
+  return `<div class="worker-card" style="background:var(--card); padding:16px; border-radius:12px; border:1px solid var(--border); text-align:center; transition:transform 0.2s;">
     <img class="worker-photo" src="${photo}" alt="${w.name}" style="width:100%; height:180px; border-radius:8px; object-fit:cover; margin-bottom:12px;">
     <h3 style="margin:0 0 6px 0; font-size:18px;">${w.name}</h3>
     <div style="color:var(--muted); font-size:13px; margin-bottom:12px;">${w.service} • ${w.experience} yrs • <span class="stars">⭐ ${w.rating}</span></div>
@@ -18,7 +18,7 @@ function cardHTML(w){
 function listCardHTML(w){
   const photo = w.photo || 'images/hasnain.jpeg';
   const verifiedBadge = w.verified ? `<svg viewBox="0 0 24 24" width="16" height="16" fill="#10b981" stroke="white" stroke-width="2" style="margin-left:4px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>` : '';
-  return `<div class="worker-list-card" style="display:flex;align-items:flex-start;padding:20px;background:#fff;border:1px solid var(--border);border-radius:12px;margin-bottom:16px;gap:20px;transition:box-shadow 0.2s;">
+  return `<div class="worker-list-card" style="display:flex;align-items:flex-start;padding:20px;background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;gap:20px;transition:box-shadow 0.2s;">
     <img class="worker-photo" src="${photo}" alt="${w.name}" style="width:96px;aspect-ratio:5/5;border-radius:8px;object-fit:cover;flex-shrink:0;">
     <div style="flex:1;">
       <h3 style="margin:0 0 4px 0;font-size:18px;display:flex;align-items:center;gap:4px;">
@@ -245,9 +245,9 @@ if (document.getElementById('profile-container')) {
 
       // Service Grid HTML
       const servicesHtml = specificServices.map(s => `
-        <div class="card" style="padding:24px; box-shadow:0 4px 16px rgba(0,0,0,0.03); border:1px solid rgba(0,0,0,0.05); transition:transform 0.2s;">
-          <div style="font-size:28px; margin-bottom:16px; width:56px;height:56px;display:flex;align-items:center;justify-content:center;background:rgba(16,185,129,0.1);border-radius:12px;">${s.icon}</div>
-          <h4 style="margin:0 0 8px; font-size:18px;">${s.name}</h4>
+        <div class="card" style="padding:24px; border:1px solid var(--border); transition:transform 0.2s;">
+          <div style="font-size:28px; margin-bottom:16px; width:56px;height:56px;display:flex;align-items:center;justify-content:center;background:rgba(108,138,61,0.1);border-radius:12px;">${s.icon}</div>
+          <h4 style="margin:0 0 8px; font-size:18px; color:var(--text);">${s.name}</h4>
           <p style="color:var(--muted); font-size:14px; margin:0 0 16px; line-height:1.6">${s.desc}</p>
           <div style="color:var(--text); font-weight:700; font-size:16px;">Starting from Rs${s.price}</div>
         </div>
@@ -287,10 +287,10 @@ if (document.getElementById('profile-container')) {
       const timeForm = times.map((t, i) => `<div class="time-slot bk-time-btn ${i===0?'selected':''}" data-val="${t}">${t}</div>`).join('');
 
       const verifiedBadge = w.verified ? `<span style="color:#10b981; font-size:18px; margin-left:6px; display:inline-flex" title="Verified Professional"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg></span>` : '';
-      const bannerBgUrl = w.service === 'Plumber' ? 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=1200&auto=format&fit=crop' :
-                          w.service === 'Electrician' ? 'https://images.unsplash.com/photo-1621905252472-740c83a77884?q=80&w=1200&auto=format&fit=crop' :
-                          w.service === 'Carpenter' ? 'https://images.unsplash.com/photo-1582282577239-2a912bbbc02d?q=80&w=1200&auto=format&fit=crop' :
-                          'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?q=80&w=1200&auto=format&fit=crop';
+      const bannerBgUrl = w.service === 'Plumber' ? 'images/plumbing.jpeg' :
+                          w.service === 'Electrician' ? 'images/electrician.jpeg' :
+                          w.service === 'Carpenter' ? 'images/carpentry.jpeg' :
+                          'images/mechanic.jpeg';
       
 
       // Similar Workers Gen
@@ -298,9 +298,9 @@ if (document.getElementById('profile-container')) {
         .filter(x => x.service === w.service && x.id !== w.id)
         .slice(0, 4)
         .map(sw => `
-          <div class="card" style="padding:20px; text-align:center; border:1px solid rgba(0,0,0,0.05); box-shadow:0 4px 16px rgba(0,0,0,0.02); transition:transform 0.2s" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+          <div class="card" style="padding:20px; text-align:center; border:1px solid var(--border); transition:transform 0.2s" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
             <img src="${sw.photo}" style="width:80px; height:80px; border-radius:50%; object-fit:cover; margin-bottom:16px;">
-            <h4 style="margin:0 0 6px; font-size:16px;">${sw.name}</h4>
+            <h4 style="margin:0 0 6px; font-size:16px; color:var(--text);">${sw.name}</h4>
             <div style="font-size:14px; color:var(--muted); margin-bottom:12px;">⭐ ${sw.rating} (${sw.experience} yrs)</div>
             <a href="profile.html?worker=${sw.id}" class="btn outline" style="padding:8px 16px; font-size:14px;">View Profile</a>
           </div>
@@ -312,19 +312,19 @@ if (document.getElementById('profile-container')) {
           <div class="profile-main-content">
             
             <!-- Beautiful Header section (Banner + Info) -->
-            <div class="card" style="padding: 0; overflow: hidden; border:1px solid rgba(0,0,0,0.05); box-shadow:0 8px 24px rgba(0,0,0,0.04); margin-bottom:24px;">
+            <div class="card" style="padding: 0; overflow: hidden; border:1px solid var(--border); margin-bottom:24px;">
               <div style="height: 220px; width: 100%; background: url('${bannerBgUrl}') center/cover no-repeat;"></div>
               
               <div style="padding: 0 32px 32px 32px; position: relative;">
                 <!-- Avatar and Action Buttons Row -->
                 <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: -64px; margin-bottom: 16px; flex-wrap:wrap; gap:16px;">
-                  <div style="background: var(--card, #fff); padding: 6px; border-radius: 50%; display:inline-block; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                    <img src="${w.photo}" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(0,0,0,0.04);">
+                  <div style="background: var(--card); padding: 6px; border-radius: 50%; display:inline-block; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                    <img src="${w.photo}" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);">
                   </div>
                   <div style="display: flex; gap: 12px; margin-bottom: 12px;">
-                    <button id="btn-save-worker" class="btn outline" style="padding: 10px 24px; font-size: 14px; width: auto; border-radius: 8px; font-weight:600; color:#555; display:flex; align-items:center; gap:6px; background:transparent; border:1px solid rgba(0,0,0,0.1); cursor:pointer;"><span style="color:#aaa;">🤍</span> Save</button>
-                    <button class="btn outline" style="padding: 10px 24px; font-size: 14px; width: auto; border-radius: 8px; font-weight:600; color:#555; background:transparent; border:1px solid rgba(0,0,0,0.1); cursor:pointer;">Message</button>
-                    <button class="btn gradient" style="padding: 10px 24px; font-size: 14px; width: auto; border-radius: 8px; font-weight:600; background:#5A8C2B; color:white; border:none; box-shadow:0 4px 12px rgba(90,140,43,0.3); cursor:pointer;" onclick="window.scrollTo({top:document.body.scrollHeight, behavior:'smooth'})">Book Service</button>
+                    <button id="btn-save-worker" class="btn outline" style="padding: 10px 24px; font-size: 14px; width: auto; border-radius: 8px; font-weight:600; color:var(--text); display:flex; align-items:center; gap:6px; background:transparent; border:1px solid var(--border); cursor:pointer;"><span style="color:#aaa;">🤍</span> Save</button>
+                    <button class="btn outline" style="padding: 10px 24px; font-size: 14px; width: auto; border-radius: 8px; font-weight:600; color:var(--text); background:transparent; border:1px solid var(--border); cursor:pointer;">Message</button>
+                    <button class="btn gradient" style="padding: 10px 24px; font-size: 14px; width: auto; border-radius: 8px; font-weight:600; background:var(--primary); color:white; border:none; box-shadow:0 4px 12px rgba(108,138,61,0.3); cursor:pointer;" onclick="window.scrollTo({top:document.body.scrollHeight, behavior:'smooth'})">Book Service</button>
                   </div>
                 </div>
                 
@@ -426,12 +426,12 @@ if (document.getElementById('profile-container')) {
 
           <!-- Right Column: Booking Sidebar (30%) -->
           <div class="profile-sidebar">
-            <div class="card" style="box-shadow: 0 16px 40px rgba(0,0,0,0.06); border:1px solid rgba(0,0,0,0.08); padding:32px;">
-              <h3 style="margin:0 0 24px; font-size:22px;">Book this Professional</h3>
+            <div class="card" style="border:1px solid var(--border); padding:32px;">
+              <h3 style="margin:0 0 24px; font-size:22px; color:var(--text);">Book this Professional</h3>
               
               <div style="margin-bottom:28px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:20px;">
                  <span style="font-size:16px; font-weight:600; color:var(--muted)">Hourly Rate</span>
-                 <span style="font-size:28px; font-weight:800">Rs${w.price}</span>
+                 <span style="font-size:28px; font-weight:800; color:var(--text)">Rs${w.price}</span>
               </div>
               
               <div style="margin-bottom:28px;">
@@ -451,8 +451,8 @@ if (document.getElementById('profile-container')) {
                 <input type="hidden" id="bk-time" value="09:00 AM">
               </div>
 
-              <div style="background: rgba(16, 185, 129, 0.08); padding: 16px; border-radius: 12px; margin-bottom: 28px; display:flex; gap:12px; align-items:flex-start;">
-                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" style="flex-shrink:0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              <div style="background: rgba(108, 138, 61, 0.08); padding: 16px; border-radius: 12px; margin-bottom: 28px; display:flex; gap:12px; align-items:flex-start; border: 1px solid var(--border);">
+                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" style="flex-shrink:0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
                  <span style="font-size:14px; color:var(--text); font-weight:600; line-height:1.4">Covered by SkillBridge Guarantee.<br><span style="font-weight:normal;color:var(--muted)">Your satisfaction is strictly protected.</span></span>
               </div>
 

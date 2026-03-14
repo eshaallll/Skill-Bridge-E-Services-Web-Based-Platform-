@@ -136,10 +136,10 @@
 
 .auth-card {
   width: 100%;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--card);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--border);
   border-radius: 28px;
   padding: 40px;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
@@ -208,8 +208,8 @@
   width: 100%;
   padding: 14px 16px 14px 44px; /* Space for icon */
   border-radius: 9999px; /* Pill shape */
-  border: 1.5px solid rgba(16, 33, 15, 0.1);
-  background: #fff;
+  border: 1.5px solid var(--border);
+  background: var(--card);
   font-size: 15px;
   color: var(--text);
   transition: all 0.2s ease;
@@ -242,11 +242,11 @@
 }
 
 .role-card-modern {
-  border: 2px solid rgba(16, 33, 15, 0.08);
+  border: 2px solid var(--border);
   border-radius: 20px;
   padding: 24px;
   text-align: center;
-  background: #fff;
+  background: var(--card);
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 8px 24px rgba(16,33,15,0.04);
@@ -313,8 +313,8 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: #fff;
-  border: 2px solid rgba(16,33,15,0.2);
+  background: var(--card);
+  border: 2px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -349,13 +349,13 @@
 
 /* Upload Box */
 .upload-box {
-  border: 2px dashed rgba(16,33,15,0.2);
+  border: 2px dashed var(--border);
   border-radius: 16px;
   padding: 32px 24px;
   text-align: center;
   cursor: pointer;
   transition: all 0.2s;
-  background: rgba(255,255,255,0.5);
+  background: var(--surface);
 }
 
 .upload-box:hover {

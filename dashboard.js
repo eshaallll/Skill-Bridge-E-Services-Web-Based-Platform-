@@ -87,13 +87,15 @@ document.addEventListener('DOMContentLoaded', () => {
         mainList.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--muted);">No saved workers yet. Browse the listing to save professionals!</div>';
       } else {
         mainList.innerHTML = workers.map(w => `
-          <div class="card" style="padding: 24px; text-align:center; position:relative; border:1px solid rgba(0,0,0,0.05);">
-            <button onclick="removeSavedWorker(${w.id})" style="position:absolute; top:12px; right:12px; background:none; border:none; cursor:pointer; color:#ef4444; font-size:18px;" title="Remove">✕</button>
-            <img src="${w.photo}" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; border:2px solid var(--primary);">
-            <h3 style="margin:0 0 4px; font-size:18px;">${w.name}</h3>
+          <div class="card" style="padding: 24px; text-align:center; position:relative; border:1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s;">
+            <button onclick="removeSavedWorker(${w.id})" style="position:absolute; top:12px; right:12px; background:none; border:none; cursor:pointer; color:#ef4444; font-size:18px; opacity:0.6; transition:opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'" title="Remove">✕</button>
+            <div style="width: 100px; height: 100px; margin: 0 auto 16px; border-radius: 50%; padding: 4px; background: var(--border);">
+              <img src="${w.photo}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+            </div>
+            <h3 style="margin:0 0 4px; font-size:18px; color:var(--text);">${w.name}</h3>
             <p style="color:var(--muted); font-size:14px; margin:0 0 16px;">${w.service}</p>
-            <div style="font-size:14px; margin-bottom:16px; font-weight:600;">⭐ ${w.rating} • ${w.experience} yrs exp</div>
-            <a href="profile.html?worker=${w.id}" class="btn outline" style="width:100%; border-radius:8px; display:inline-block; text-decoration:none;">View Profile</a>
+            <div style="font-size:14px; margin-bottom:16px; font-weight:600; color:var(--text);">⭐ ${w.rating} • ${w.experience} yrs exp</div>
+            <a href="profile.html?worker=${w.id}" class="btn outline" style="width:100%; border-radius:8px; display:inline-block; text-decoration:none; font-size:14px;">View Profile</a>
           </div>
         `).join('');
       }
@@ -105,13 +107,13 @@ document.addEventListener('DOMContentLoaded', () => {
         overviewList.innerHTML = '<p class="muted" style="grid-column: 1/-1; padding: 20px; text-align:center;">No saved workers yet.</p>';
       } else {
         overviewList.innerHTML = workers.slice(0, 4).map(w => `
-          <div style="display:flex; align-items:center; gap:12px; padding:12px; background:#f8fafc; border-radius:12px;">
-            <img src="${w.photo}" style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
+          <div style="display:flex; align-items:center; gap:12px; padding:12px; background:var(--surface); border:1px solid var(--border); border-radius:12px; transition: all 0.2s;" onmouseover="this.style.background='var(--dropdown-hover)'" onmouseout="this.style.background='var(--surface)'">
+            <img src="${w.photo}" style="width:40px; height:40px; border-radius:50%; object-fit:cover; border:1px solid var(--border);">
             <div style="flex:1">
-               <div style="font-weight:600; font-size:14px;">${w.name}</div>
+               <div style="font-weight:600; font-size:14px; color:var(--text);">${w.name}</div>
                <div style="font-size:12px; color:var(--muted);">${w.service}</div>
             </div>
-            <a href="profile.html?worker=${w.id}" style="font-size:18px; text-decoration:none; color:var(--primary);">→</a>
+            <a href="profile.html?worker=${w.id}" style="font-size:18px; text-decoration:none; color:var(--primary); transition: transform 0.2s;" onmouseover="this.style.transform='translateX(4px)'" onmouseout="this.style.transform='translateX(0)'">→</a>
           </div>
         `).join('');
       }

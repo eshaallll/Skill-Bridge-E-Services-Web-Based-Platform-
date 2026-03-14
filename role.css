@@ -1,6 +1,3 @@
-/* Role selection page styles (complements existing `style.css`) */
-:root{--bg:#F3EFE6;--accent:#6C8A3D;--card:#FCF4D7;--muted:#6b6b6b;--text:#10210f}
-*{box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);margin:0}
 .site-nav.role-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;background:transparent;box-shadow:none}
 .site-nav.role-nav .brand{font-weight:700;font-size:18px}
@@ -14,7 +11,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
 .role-card .subtitle{color:var(--muted);margin-bottom:20px}
 
 .role-options{display:flex;gap:20px;justify-content:center;align-items:stretch}
-.option{flex:1;max-width:420px;background:#fff;border-radius:12px;padding:20px;box-shadow:0 6px 20px rgba(16,33,15,0.06);display:flex;flex-direction:column;align-items:center;transition:transform .16s ease,box-shadow .16s ease}
+.option{flex:1;max-width:420px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;box-shadow:0 6px 20px rgba(0,0,0,0.06);display:flex;flex-direction:column;align-items:center;transition:transform .16s ease,box-shadow .16s ease}
 .option:hover{transform:translateY(-6px);box-shadow:0 14px 36px rgba(16,33,15,0.12)}
 .role-icon{width:72px;height:72px;margin-bottom:12px}
 .option h3{margin:8px 0}
