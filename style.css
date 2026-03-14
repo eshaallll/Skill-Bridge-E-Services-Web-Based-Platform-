@@ -74,6 +74,46 @@ html, body {
 .stars { color: #f59e0b; }
 .badge { display: inline-block; background: var(--bg); color: var(--text); padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; }
 
+/* --- LISTING PAGE LAYOUT --- */
+.layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 32px;
+  width: 100%;
+}
+
+@media (max-width: 920px) {
+  .layout { grid-template-columns: 1fr; }
+}
+
+.filters {
+  background: var(--surface);
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  position: sticky;
+  top: 96px;
+  align-self: flex-start;
+}
+
+/* Worker List Card (LinkedIn style) */
+.worker-list-card {
+  display: flex !important;
+  align-items: flex-start;
+  padding: 24px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 20px;
+  gap: 24px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.worker-list-card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  transform: translateY(-2px);
+}
+
 /* --- MODERN PROFILE LAYOUT (FIVERR/UPWORK STYLE) --- */
 .profile-layout {
   display: flex;
@@ -217,3 +257,6 @@ html, body {
 .sb-footer-full { background: #1a2e0d; color: #c8d8a8; padding: 56px 0 20px; margin-top: 64px; }
 .sb-footer-inner { max-width: 1300px; margin: 0 auto; padding: 0 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
 .sb-footer-bottom { max-width: 1300px; margin: 40px auto 0; padding: 20px 32px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; font-size: 13px; }
+
+/* AUTH COMPONENTS (Split View Fix) */
+.wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }

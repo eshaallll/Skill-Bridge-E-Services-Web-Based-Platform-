@@ -3,18 +3,13 @@ function q(name){return new URLSearchParams(location.search).get(name)}
 
 function cardHTML(w){
   const photo = w.photo || 'images/hasnain.jpeg';
-  return `<div class="worker-card">
-    <div style="display:flex;gap:12px;align-items:center">
-      <img src="${photo}" alt="${w.name}" style="width:72px;aspect-ratio:5/5;border-radius:8px;object-fit:cover;">
-      <div style="flex:1">
-        <h3 style="margin:0 0 6px 0">${w.name}</h3>
-        <div style="color:#6b7280;font-size:13px">${w.service} • ${w.experience} yrs • <span class=\"stars\">⭐ ${w.rating}</span></div>
-        <p style="margin:8px 0 0 0">${w.bio}</p>
-      </div>
-    </div>
-    <div style="display:flex;gap:8px;margin-top:12px">
-      <a class="btn outline" href="profile.html?worker=${w.id}">View Profile</a>
-      <a class="btn gradient" href="booking.html?worker=${w.id}">Book Now</a>
+  return `<div class="worker-card" style="background:#fff; padding:16px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.04); text-align:center; transition:transform 0.2s;">
+    <img src="${photo}" alt="${w.name}" style="width:100%; height:180px; border-radius:8px; object-fit:cover; margin-bottom:12px;">
+    <h3 style="margin:0 0 6px 0; font-size:18px;">${w.name}</h3>
+    <div style="color:var(--muted); font-size:13px; margin-bottom:12px;">${w.service} • ${w.experience} yrs • <span class="stars">⭐ ${w.rating}</span></div>
+    <div style="display:flex; gap:8px;">
+      <a class="btn outline" href="profile.html?worker=${w.id}" style="flex:1; padding:8px; font-size:13px;">View</a>
+      <a class="btn gradient" href="profile.html?worker=${w.id}" style="flex:1; padding:8px; font-size:13px; background:#5A8C2B;">Book</a>
     </div>
   </div>`
 }
