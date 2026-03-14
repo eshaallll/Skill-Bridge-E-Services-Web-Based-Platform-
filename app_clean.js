@@ -322,7 +322,7 @@ if (document.getElementById('profile-container')) {
                     <img src="${w.photo}" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(0,0,0,0.04);">
                   </div>
                   <div style="display: flex; gap: 12px; margin-bottom: 12px;">
-                    <button class="btn outline" style="padding: 10px 24px; font-size: 14px; width: auto; border-radius: 8px; font-weight:600; color:#555; display:flex; align-items:center; gap:6px; background:transparent; border:1px solid rgba(0,0,0,0.1); cursor:pointer;"><span style="color:#aaa;">🤍</span> Save</button>
+                    <button id="btn-save-worker" class="btn outline" style="padding: 10px 24px; font-size: 14px; width: auto; border-radius: 8px; font-weight:600; color:#555; display:flex; align-items:center; gap:6px; background:transparent; border:1px solid rgba(0,0,0,0.1); cursor:pointer;"><span style="color:#aaa;">🤍</span> Save</button>
                     <button class="btn outline" style="padding: 10px 24px; font-size: 14px; width: auto; border-radius: 8px; font-weight:600; color:#555; background:transparent; border:1px solid rgba(0,0,0,0.1); cursor:pointer;">Message</button>
                     <button class="btn gradient" style="padding: 10px 24px; font-size: 14px; width: auto; border-radius: 8px; font-weight:600; background:#5A8C2B; color:white; border:none; box-shadow:0 4px 12px rgba(90,140,43,0.3); cursor:pointer;" onclick="window.scrollTo({top:document.body.scrollHeight, behavior:'smooth'})">Book Service</button>
                   </div>
@@ -505,6 +505,31 @@ if (document.getElementById('profile-container')) {
           document.getElementById('bk-time').value = c.dataset.val;
         });
       });
+
+      // Save Worker Logic
+      const saveBtn = document.getElementById('btn-save-worker');
+      if (saveBtn) {
+        // Initial state
+        let saved = JSON.parse(localStorage.getItem('savedWorkers') || '[]');
+        if (saved.includes(id)) {
+          saveBtn.innerHTML = '<span style="color:#ef4444;">❤</span> Saved';
+          saveBtn.style.color = '#ef4444';
+        }
+
+        saveBtn.addEventListener('click', () => {
+          let currentSaved = JSON.parse(localStorage.getItem('savedWorkers') || '[]');
+          if (currentSaved.includes(id)) {
+            currentSaved = currentSaved.filter(item => item !== id);
+            saveBtn.innerHTML = '<span style="color:#aaa;">🤍</span> Save';
+            saveBtn.style.color = '#555';
+          } else {
+            currentSaved.push(id);
+            saveBtn.innerHTML = '<span style="color:#ef4444;">❤</span> Saved';
+            saveBtn.style.color = '#ef4444';
+          }
+          localStorage.setItem('savedWorkers', JSON.stringify(currentSaved));
+        });
+      }
 
       // Booking Confirm Logic
       const bookBtn = document.getElementById('profile-book-confirm');

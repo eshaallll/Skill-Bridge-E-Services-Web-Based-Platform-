@@ -163,7 +163,7 @@
           <div class="panel-header">
             <h2 class="panel-title">Recent Activity</h2>
             <button class="btn outline" style="padding: 6px 14px; font-size: 13px"
-              onclick="$('.nav-item[data-target=\'sec-bookings\']').click()">View All</button>
+              onclick="document.querySelector('.nav-item[data-target=\'sec-bookings\']').click()">View All</button>
           </div>
           <div style="overflow-x:auto">
             <table class="table" style="margin:0;border:none">
@@ -197,6 +197,18 @@
                 </tr>
               </tbody>
             </table>
+          </div>
+        </div>
+
+        <!-- Saved Workers Preview -->
+        <div class="panel" style="margin-top:24px">
+          <div class="panel-header">
+            <h2 class="panel-title">Your Favorite Workers</h2>
+            <button class="btn outline" style="padding: 6px 14px; font-size: 13px"
+              onclick="document.querySelector('.nav-item[data-target=\'sec-saved\']').click()">View All</button>
+          </div>
+          <div id="overview-saved-list" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap:16px;">
+            <p class="muted" style="grid-column: 1/-1; padding: 20px; text-align:center;">No saved workers yet.</p>
           </div>
         </div>
 
@@ -256,6 +268,9 @@
           <h1 class="section-title">Saved Workers</h1>
         </div>
         <p class="muted">Workers you've bookmarked for fast access.</p>
+        <div id="saved-workers-list" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap:24px; margin-top:24px;">
+           <!-- Saved workers will appear here -->
+        </div>
       </section>
 
       <!-- SECTION: PROFILE SETTINGS -->
@@ -299,6 +314,7 @@
   <!-- jQuery for the View All quick mock toggle -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <!-- Load Interactivity -->
+  <script src="data.js"></script>
   <script src="dashboard.js"></script>
   <script src="footer.js"></script>
 </body>

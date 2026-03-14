@@ -102,12 +102,13 @@
 
       <!-- Footer Bottom Bar -->
       <div class="sb-footer-bottom">
-        <span>© 2026 SkillBridge Platform. All rights reserved.</span>
-        <span>Connecting skilled workers across Pakistan 🇵🇰</span>
+        <div class="sb-footer-bottom-inner">
+          <span>© 2026 SkillBridge Platform. All rights reserved.</span>
+          <span>Connecting skilled workers across Pakistan 🇵🇰</span>
+        </div>
       </div>
     </footer>`;
 
   // Inject the appropriate footer
   document.body.insertAdjacentHTML('beforeend', isHome ? fullFooter : minimalFooter);
 })();
-

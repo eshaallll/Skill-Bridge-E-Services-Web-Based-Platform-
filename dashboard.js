@@ -62,12 +62,73 @@ document.addEventListener('DOMContentLoaded', () => {
       // Update Sections
       sections.forEach(sec => sec.classList.remove('active'));
       const targetSec = document.getElementById(targetId);
-      if(targetSec) targetSec.classList.add('active');
+      if(targetSec) {
+        targetSec.classList.add('active');
+        // Trigger specific logic based on section
+        if (targetId === 'sec-saved' || targetId === 'sec-overview') renderSavedWorkers();
+      }
 
       // Close mobile menu on click
       closeMobileMenu();
     });
   });
+
+  // --- SAVED WORKERS LOGIC ---
+  function renderSavedWorkers() {
+    const mainList = document.getElementById('saved-workers-list');
+    const overviewList = document.getElementById('overview-saved-list');
+    
+    const savedIds = JSON.parse(localStorage.getItem('savedWorkers') || '[]');
+    const workers = (typeof SKILLBRIDGE_DATA !== 'undefined') ? SKILLBRIDGE_DATA.workers.filter(w => savedIds.includes(w.id)) : [];
+
+    // Render Main List
+    if (mainList) {
+      if (workers.length === 0) {
+        mainList.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--muted);">No saved workers yet. Browse the listing to save professionals!</div>';
+      } else {
+        mainList.innerHTML = workers.map(w => `
+          <div class="card" style="padding: 24px; text-align:center; position:relative; border:1px solid rgba(0,0,0,0.05);">
+            <button onclick="removeSavedWorker(${w.id})" style="position:absolute; top:12px; right:12px; background:none; border:none; cursor:pointer; color:#ef4444; font-size:18px;" title="Remove">✕</button>
+            <img src="${w.photo}" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; border:2px solid var(--primary);">
+            <h3 style="margin:0 0 4px; font-size:18px;">${w.name}</h3>
+            <p style="color:var(--muted); font-size:14px; margin:0 0 16px;">${w.service}</p>
+            <div style="font-size:14px; margin-bottom:16px; font-weight:600;">⭐ ${w.rating} • ${w.experience} yrs exp</div>
+            <a href="profile.html?worker=${w.id}" class="btn outline" style="width:100%; border-radius:8px; display:inline-block; text-decoration:none;">View Profile</a>
+          </div>
+        `).join('');
+      }
+    }
+
+    // Render Overview Preview (max 4)
+    if (overviewList) {
+      if (workers.length === 0) {
+        overviewList.innerHTML = '<p class="muted" style="grid-column: 1/-1; padding: 20px; text-align:center;">No saved workers yet.</p>';
+      } else {
+        overviewList.innerHTML = workers.slice(0, 4).map(w => `
+          <div style="display:flex; align-items:center; gap:12px; padding:12px; background:#f8fafc; border-radius:12px;">
+            <img src="${w.photo}" style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
+            <div style="flex:1">
+               <div style="font-weight:600; font-size:14px;">${w.name}</div>
+               <div style="font-size:12px; color:var(--muted);">${w.service}</div>
+            </div>
+            <a href="profile.html?worker=${w.id}" style="font-size:18px; text-decoration:none; color:var(--primary);">→</a>
+          </div>
+        `).join('');
+      }
+    }
+  }
+
+  window.removeSavedWorker = function(id) {
+     let saved = JSON.parse(localStorage.getItem('savedWorkers') || '[]');
+     saved = saved.filter(item => item !== id);
+     localStorage.setItem('savedWorkers', JSON.stringify(saved));
+     renderSavedWorkers();
+  };
+
+  // Initial render if section is active (e.g. on direct link or reload)
+  if (document.getElementById('sec-saved')?.classList.contains('active') || document.getElementById('sec-overview')?.classList.contains('active')) {
+    renderSavedWorkers();
+  }
 
 });
 
