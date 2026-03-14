@@ -112,53 +112,12 @@
 
     <!-- TOP RATED WORKERS -->
     <section class="section">
-      <h2>Top Rated Workers</h2>
-      <div class="workers">
-        <!-- Worker card template repeated -->
-        <article class="worker-card">
-          <img class="worker-photo" src="images/eshaal.jpeg" alt="Eshaal Hussain">
-          <h3 class="worker-name">Eshaal Hussain</h3>
-          <div class="meta">Electrician • 5 years</div>
-          <div class="location">📍 Lahore</div>
-          <div class="rating">⭐ 4.9 <span class="muted">(120 reviews)</span></div>
-          <button class="btn outline view" onclick="location.href='profile.html?worker=1'">View Profile</button>
-        </article>
-
-        <article class="worker-card">
-          <img class="worker-photo" src="images/wania.jpeg" alt="Wania Khalid">
-          <h3 class="worker-name">Wania Khalid</h3>
-          <div class="meta">Electrician• 4 years</div>
-          <div class="location">📍 Islamabad</div>
-          <div class="rating">⭐ 4.8 <span class="muted">(110 reviews)</span></div>
-          <button class="btn outline view" onclick="location.href='profile.html?worker=2'">View Profile</button>
-        </article>
-
-        <article class="worker-card">
-          <img class="worker-photo" src="images/hafsa.jpeg" alt="Hafsa Tanveer">
-          <h3 class="worker-name">Hafsa Tanveer</h3>
-          <div class="meta">Carpenter • 3 years</div>
-          <div class="location">📍 Rawalpindi</div>
-          <div class="rating">⭐ 4.7 <span class="muted">(95 reviews)</span></div>
-          <button class="btn outline view" onclick="location.href='profile.html?worker=4'">View Profile</button>
-        </article>
-
-        <article class="worker-card">
-          <img class="worker-photo" src="images/hasnain.jpeg" alt="Hasnain Afkar">
-          <h3 class="worker-name">Hasnain Afkar</h3>
-          <div class="meta">Mechanic • 6 years</div>
-          <div class="location">📍 Karachi</div>
-          <div class="rating">⭐ 4.6 <span class="muted">(90 reviews)</span></div>
-          <button class="btn outline view" onclick="location.href='profile.html?worker=6'">View Profile</button>
-        </article>
-
-        <article class="worker-card">
-          <img class="worker-photo" src="images/talal.jpeg" alt="Talal Amer">
-          <h3 class="worker-name">Talal Amer</h3>
-          <div class="meta">Plumber • 4 years</div>
-          <div class="location">📍 Lahore</div>
-          <div class="rating">⭐ 4.5 <span class="muted">(85 reviews)</span></div>
-          <button class="btn outline view" onclick="location.href='profile.html?worker=7'">View Profile</button>
-        </article>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:8px;">
+        <h2 style="margin:0">Top Rated Workers</h2>
+        <a href="listing.html" style="text-decoration:none;font-weight:600;font-size:14px;color:var(--primary)">View All &rarr;</a>
+      </div>
+      <div class="workers" id="top-rated-workers">
+        <!-- Rendered dynamically by home-workers.js -->
       </div>
     </section>
 
@@ -285,65 +244,11 @@
 
   </main>
 
-  <!-- SECTION 4: MODERN FOOTER -->
-  <footer class="modern-footer">
-    <div class="container footer-grid">
-      <div class="footer-col brand-col">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
-          <div class="logo-mark">SB</div>
-          <button class="btn gradient" style="padding: 14px 32px; font-size: 16px;" onclick="location.href='index.html'">Become a Worker</button>
-        </div>
-        <p class="footer-desc">Connect with top-rated professionals for carpentry, plumbing, electrical, and mechanic services near you.</p>
-        <div class="social-icons">
-          <a href="#" class="social-circle">FB</a>
-          <a href="#" class="social-circle">IG</a>
-          <a href="#" class="social-circle">TW</a>
-        </div>
-      </div>
-
-      <div class="footer-col links-col">
-        <h3>Quick Links</h3>
-        <ul class="footer-list">
-          <li><a href="home.html">Home</a></li>
-          <li><a href="listing.html">All Services</a></li>
-          <li><a href="customer-dashboard.html">My Account</a></li>
-          <li><a href="role.html">Switch Role</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col contact-col">
-        <h3>Contact Us</h3>
-        <ul class="footer-list">
-          <li style="display:flex;gap:8px"><span>📍</span> 123 Skill Ave, Tech City, TC 1000</li>
-          <li style="display:flex;gap:8px"><span>📞</span> +92 (300) 123-4567</li>
-          <li style="display:flex;gap:8px"><span>✉️</span> support@skillbridge.com</li>
-        </ul>
-      </div>
-
-      <div class="footer-col newsletter-col">
-        <h3>Subscribe</h3>
-        <p class="footer-desc">Get the latest deals and updates straight to your inbox.</p>
-        <form class="newsletter-form" onsubmit="alert('Subscribed!'); return false;">
-          <input type="email" placeholder="Your Email Address" required>
-          <button type="submit" class="btn gradient">Join</button>
-        </form>
-      </div>
-    </div>
-    
-    <div class="container">
-      <div class="footer-bottom">
-        <div class="copyright">© 2026 SkillBridge. All rights reserved.</div>
-        <div class="footer-legal">
-          <a href="listing.html">Find a Worker</a>
-          <a href="index.html">Sign Up as Worker</a>
-          <a href="#">How it Works</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
   <script src="home.js"></script>
   <script src="dashboard.js"></script>
 
+  <script src="data.js"></script>
+  <script src="home-workers.js"></script>
+  <script src="footer.js"></script>
 </body>
 </html>
