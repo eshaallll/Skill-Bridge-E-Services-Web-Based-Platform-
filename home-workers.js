@@ -22,7 +22,9 @@
     .filter(Boolean)
     .map(w => `
       <article class="worker-card">
-        <img class="worker-photo" src="${w.photo}" alt="${w.name}">
+        <div class="worker-photo-wrapper">
+          <img class="worker-photo" src="${w.photo}" alt="${w.name}">
+        </div>
         <h3 class="worker-name">${w.name}${w.verified ? ' <span style="color:#10b981;font-size:14px;" title="Verified">&#10003;</span>' : ''}</h3>
         <div class="meta">${w.service} &bull; ${w.experience} yrs</div>
         <div class="location">&#x1F4CD; ${w.location}</div>

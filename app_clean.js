@@ -4,7 +4,7 @@ function q(name){return new URLSearchParams(location.search).get(name)}
 function cardHTML(w){
   const photo = w.photo || 'images/hasnain.jpeg';
   return `<div class="worker-card" style="background:#fff; padding:16px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.04); text-align:center; transition:transform 0.2s;">
-    <img src="${photo}" alt="${w.name}" style="width:100%; height:180px; border-radius:8px; object-fit:cover; margin-bottom:12px;">
+    <img class="worker-photo" src="${photo}" alt="${w.name}" style="width:100%; height:180px; border-radius:8px; object-fit:cover; margin-bottom:12px;">
     <h3 style="margin:0 0 6px 0; font-size:18px;">${w.name}</h3>
     <div style="color:var(--muted); font-size:13px; margin-bottom:12px;">${w.service} • ${w.experience} yrs • <span class="stars">⭐ ${w.rating}</span></div>
     <div style="display:flex; gap:8px;">
@@ -19,7 +19,7 @@ function listCardHTML(w){
   const photo = w.photo || 'images/hasnain.jpeg';
   const verifiedBadge = w.verified ? `<svg viewBox="0 0 24 24" width="16" height="16" fill="#10b981" stroke="white" stroke-width="2" style="margin-left:4px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>` : '';
   return `<div class="worker-list-card" style="display:flex;align-items:flex-start;padding:20px;background:#fff;border:1px solid var(--border);border-radius:12px;margin-bottom:16px;gap:20px;transition:box-shadow 0.2s;">
-    <img src="${photo}" alt="${w.name}" style="width:96px;aspect-ratio:5/5;border-radius:8px;object-fit:cover;flex-shrink:0;">
+    <img class="worker-photo" src="${photo}" alt="${w.name}" style="width:96px;aspect-ratio:5/5;border-radius:8px;object-fit:cover;flex-shrink:0;">
     <div style="flex:1;">
       <h3 style="margin:0 0 4px 0;font-size:18px;display:flex;align-items:center;gap:4px;">
         ${w.name} ${verifiedBadge} <span style="color:var(--muted);font-weight:normal;font-size:14px;margin-left:4px;">✨ Pro</span>

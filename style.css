@@ -69,6 +69,12 @@ html, body {
   transform: translateY(-1px);
 }
 
+.btn.outline:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
 /* UTILITIES */
 .muted { color: var(--muted); }
 .stars { color: #f59e0b; }
