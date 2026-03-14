@@ -8,7 +8,7 @@ function cardHTML(w){
       <img src="${photo}" alt="${w.name}" style="width:72px;aspect-ratio:5/5;border-radius:8px;object-fit:cover;">
       <div style="flex:1">
         <h3 style="margin:0 0 6px 0">${w.name}</h3>
-        <div style="color:#6b7280;font-size:13px">${w.service} ??? ${w.experience} yrs ??? <span class=\"stars\">??? ${w.rating}</span></div>
+        <div style="color:#6b7280;font-size:13px">${w.service} • ${w.experience} yrs • <span class=\"stars\">⭐ ${w.rating}</span></div>
         <p style="margin:8px 0 0 0">${w.bio}</p>
       </div>
     </div>
@@ -27,13 +27,13 @@ function listCardHTML(w){
     <img src="${photo}" alt="${w.name}" style="width:96px;aspect-ratio:5/5;border-radius:8px;object-fit:cover;flex-shrink:0;">
     <div style="flex:1;">
       <h3 style="margin:0 0 4px 0;font-size:18px;display:flex;align-items:center;gap:4px;">
-        ${w.name} ${verifiedBadge} <span style="color:var(--muted);font-weight:normal;font-size:14px;margin-left:4px;">??? Pro</span>
+        ${w.name} ${verifiedBadge} <span style="color:var(--muted);font-weight:normal;font-size:14px;margin-left:4px;">✨ Pro</span>
       </h3>
       <div style="color:var(--text);font-size:15px;font-weight:500;margin-bottom:2px;">
-        ${w.service} Specialist ??? ${w.experience} years experience
+        ${w.service} Specialist • ${w.experience} years experience
       </div>
       <div style="color:var(--muted);font-size:13px;margin-bottom:8px;">
-        ???? ${w.location || 'Local Region'} ??? ???? $${w.price || 25}/hr
+        📍 ${w.location || 'Local Region'} • 💰 Rs${w.price || 25}/hr
       </div>
       <p style="margin:0;font-size:14px;color:var(--muted);line-height:1.5;">
         Summary: ... ${w.bio}
@@ -42,7 +42,7 @@ function listCardHTML(w){
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:12px;">
       <a class="btn outline" href="profile.html?worker=${w.id}" style="border-radius:24px;padding:6px 24px;">View Profile</a>
       <div style="font-size:14px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:4px;">
-        <span style="color:#f59e0b;">???</span> ${w.rating}
+        <span style="color:#f59e0b;">⭐</span> ${w.rating}
       </div>
     </div>
   </div>`
@@ -51,14 +51,14 @@ function listCardHTML(w){
 function goCategory(cat){ location.href = 'listing.html?cat='+encodeURIComponent(cat) }
 
 // Home rendering
-if (location.pathname.endsWith('/home.html') || location.pathname.endsWith('home.html')){
+if (document.getElementById('top-workers')) {
   const container = document.getElementById('top-workers');
   const top = SKILLBRIDGE_DATA.workers.slice().sort((a,b)=>b.rating-a.rating).slice(0,4);
   container.innerHTML = top.map(cardHTML).join('')
 }
 
 // Listing rendering
-if (location.pathname.endsWith('/listing.html') || location.pathname.endsWith('listing.html')){
+if (document.getElementById('workers-list')) {
   const list = document.getElementById('workers-list');
   const title = document.getElementById('listing-title');
   const catRadios = document.querySelectorAll('input[name="filter-category"]');
@@ -136,7 +136,12 @@ if (location.pathname.endsWith('/listing.html') || location.pathname.endsWith('l
     title.textContent = (selectedCat === 'All' ? 'Available' : selectedCat + ' ') + 'workers';
     
     // Render list
-    list.innerHTML = filtered.map(listCardHTML).join('') || '<div style="padding:20px;text-align:center;color:var(--muted);">No workers found matching your criteria.</div>';
+    try {
+      list.innerHTML = filtered.map(listCardHTML).join('') || '<div style="padding:20px;text-align:center;color:var(--muted);">No workers found matching your criteria.</div>';
+    } catch(e) {
+      list.innerHTML = `<div style="padding:20px;color:red;font-weight:bold;">Error rendering workers: ${e.message}</div>`;
+      console.error(e);
+    }
   }
 
   // Attach Event Listeners
@@ -180,7 +185,7 @@ if (location.pathname.endsWith('/listing.html') || location.pathname.endsWith('l
 
 
 // Profile rendering (Advanced Fiverr-style)
-if (location.pathname.endsWith('/profile.html') || location.pathname.endsWith('profile.html')){
+if (document.getElementById('profile-container')) {
   const id = parseInt(q('worker'),10);
   const container = document.getElementById('profile-container');
   if (!id || isNaN(id)){
@@ -196,23 +201,23 @@ if (location.pathname.endsWith('/profile.html') || location.pathname.endsWith('p
       const reviewsCount = Math.floor(w.rating * 12 + Math.random() * 30);
       
       const specificServices = w.service === 'Plumber' ? [
-        { name: 'Pipe Fitting', price: 40, icon: '????', desc: 'Expert pipe fitting for residential buildings with zero leakage guarantee.' },
-        { name: 'Drain Cleaning', price: 50, icon: '????', desc: 'Deep drain cleaning to resolve and prevent major water blockages.' },
-        { name: 'Leak Repair', price: 30, icon: '????', desc: 'Fast turnaround leak repair for sinks, toilets, and showers.' },
-        { name: 'Water Heater Install', price: 120, icon: '????', desc: 'Full installation and setup of new electric or gas water heaters.' }
+        { name: 'Pipe Fitting', price: 40, icon: '🔧', desc: 'Expert pipe fitting for residential buildings with zero leakage guarantee.' },
+        { name: 'Drain Cleaning', price: 50, icon: '💧', desc: 'Deep drain cleaning to resolve and prevent major water blockages.' },
+        { name: 'Leak Repair', price: 30, icon: '🚿', desc: 'Fast turnaround leak repair for sinks, toilets, and showers.' },
+        { name: 'Water Heater Install', price: 120, icon: '🔥', desc: 'Full installation and setup of new electric or gas water heaters.' }
       ] : w.service === 'Electrician' ? [
-        { name: 'Wiring Setup', price: 80, icon: '???', desc: 'Complete home or office wiring setup according to safety standards.' },
-        { name: 'Lighting Fix', price: 40, icon: '????', desc: 'Repairing or installing new ambient light fixtures.' },
-        { name: 'Panel Upgrade', price: 150, icon: '????', desc: 'Upgrading electrical panels to support modern heavy appliances.' }
+        { name: 'Wiring Setup', price: 80, icon: '🔌', desc: 'Complete home or office wiring setup according to safety standards.' },
+        { name: 'Lighting Fix', price: 40, icon: '💡', desc: 'Repairing or installing new ambient light fixtures.' },
+        { name: 'Panel Upgrade', price: 150, icon: '⚡', desc: 'Upgrading electrical panels to support modern heavy appliances.' }
       ] : w.service === 'Carpenter' ? [
-        { name: 'Custom Furniture', price: 200, icon: '????', desc: 'Designing and building custom wooden furniture pieces.' },
-        { name: 'Door Repair', price: 40, icon: '????', desc: 'Fixing hinges, locks, and frames for interior and exterior doors.' },
-        { name: 'Wood Polishing', price: 60, icon: '????', desc: 'Premium polishing to restore the original shine of wooden surfaces.' }
+        { name: 'Custom Furniture', price: 200, icon: '🪑', desc: 'Designing and building custom wooden furniture pieces.' },
+        { name: 'Door Repair', price: 40, icon: '🚪', desc: 'Fixing hinges, locks, and frames for interior and exterior doors.' },
+        { name: 'Wood Polishing', price: 60, icon: '✨', desc: 'Premium polishing to restore the original shine of wooden surfaces.' }
       ] : [
-        { name: 'Engine Diagnostic', price: 60, icon: '????', desc: 'Full computer diagnostic of engine lights and performance.' },
-        { name: 'Brake Repair', price: 100, icon: '????', desc: 'Pad replacement and rotor resurfacing for maximum stopping power.' },
-        { name: 'Oil Change', price: 35, icon: '???????', desc: 'Standard oil and filter change with premium synthetic blend.' },
-        { name: 'Tire Rotation', price: 25, icon: '??????', desc: 'Rotating and balancing tires for smooth driving.' }
+        { name: 'Engine Diagnostic', price: 60, icon: '💻', desc: 'Full computer diagnostic of engine lights and performance.' },
+        { name: 'Brake Repair', price: 100, icon: '🛑', desc: 'Pad replacement and rotor resurfacing for maximum stopping power.' },
+        { name: 'Oil Change', price: 35, icon: '🛢️', desc: 'Standard oil and filter change with premium synthetic blend.' },
+        { name: 'Tire Rotation', price: 25, icon: '🛞', desc: 'Rotating and balancing tires for smooth driving.' }
       ];
 
       const certifications = [
@@ -249,7 +254,7 @@ if (location.pathname.endsWith('/profile.html') || location.pathname.endsWith('p
           <div style="font-size:28px; margin-bottom:16px; width:56px;height:56px;display:flex;align-items:center;justify-content:center;background:rgba(16,185,129,0.1);border-radius:12px;">${s.icon}</div>
           <h4 style="margin:0 0 8px; font-size:18px;">${s.name}</h4>
           <p style="color:var(--muted); font-size:14px; margin:0 0 16px; line-height:1.6">${s.desc}</p>
-          <div style="color:var(--text); font-weight:700; font-size:16px;">Starting from $${s.price}</div>
+          <div style="color:var(--text); font-weight:700; font-size:16px;">Starting from Rs${s.price}</div>
         </div>
       `).join('');
 
@@ -274,7 +279,7 @@ if (location.pathname.endsWith('/profile.html') || location.pathname.endsWith('p
               <div style="font-size:13px; color:var(--muted)">Hired for ${w.service}</div>
             </div>
           </div>
-          <div class="review-stars">??????????????? 5.0</div>
+          <div class="review-stars">⭐⭐⭐⭐⭐ 5.0</div>
           <p class="review-text">"Excellent work! ${w.name.split(' ')[0]} was incredibly professional, communicated clearly, and solved the issue faster than expected. Highly recommended."</p>
           <div style="font-size:13px; color:var(--muted); font-weight:500;">Reviewed 2 weeks ago</div>
         </div>
@@ -301,7 +306,7 @@ if (location.pathname.endsWith('/profile.html') || location.pathname.endsWith('p
           <div class="card" style="padding:20px; text-align:center; border:1px solid rgba(0,0,0,0.05); box-shadow:0 4px 16px rgba(0,0,0,0.02); transition:transform 0.2s" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
             <img src="${sw.photo}" style="width:80px; height:80px; border-radius:50%; object-fit:cover; margin-bottom:16px;">
             <h4 style="margin:0 0 6px; font-size:16px;">${sw.name}</h4>
-            <div style="font-size:14px; color:var(--muted); margin-bottom:12px;">??? ${sw.rating} (${sw.experience} yrs)</div>
+            <div style="font-size:14px; color:var(--muted); margin-bottom:12px;">⭐ ${sw.rating} (${sw.experience} yrs)</div>
             <a href="profile.html?worker=${sw.id}" class="btn outline" style="padding:8px 16px; font-size:14px;">View Profile</a>
           </div>
         `).join('');
@@ -312,48 +317,48 @@ if (location.pathname.endsWith('/profile.html') || location.pathname.endsWith('p
           <div class="profile-main-content">
             
             <!-- Beautiful Header section (Banner + Info) -->
-            <div class="card" style="padding: 0; overflow: hidden; border:1px solid rgba(0,0,0,0.05); box-shadow:0 8px 24px rgba(0,0,0,0.04)">
-              <div style="height: 180px; width: 100%; background: url('${bannerBgUrl}') center/cover no-repeat;"></div>
+            <div class="card" style="padding: 0; overflow: hidden; border:1px solid rgba(0,0,0,0.05); box-shadow:0 8px 24px rgba(0,0,0,0.04); margin-bottom:24px;">
+              <div style="height: 220px; width: 100%; background: url('${bannerBgUrl}') center/cover no-repeat;"></div>
               
-              <div style="padding: 0 32px 24px 32px; position: relative;">
+              <div style="padding: 0 32px 32px 32px; position: relative;">
                 <!-- Avatar and Action Buttons Row -->
-                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: -60px; margin-bottom: 12px; flex-wrap:wrap; gap:16px;">
-                  <div style="background: var(--card); padding: 5px; border-radius: 50%; display:inline-block;">
-                    <img src="${w.photo}" style="width: 124px; height: 124px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(0,0,0,0.04);">
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: -64px; margin-bottom: 16px; flex-wrap:wrap; gap:16px;">
+                  <div style="background: var(--card, #fff); padding: 6px; border-radius: 50%; display:inline-block; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                    <img src="${w.photo}" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(0,0,0,0.04);">
                   </div>
-                  <div style="display: flex; gap: 10px; margin-bottom: 8px;">
-                    <button class="btn outline" style="padding: 10px 20px; font-size: 14px; width: auto; border-radius: 8px;">???? Save</button>
-                    <button class="btn outline" style="padding: 10px 20px; font-size: 14px; width: auto; border-radius: 8px;">Message</button>
-                    <button class="btn gradient" style="padding: 10px 24px; font-size: 14px; width: auto; border-radius: 8px;" onclick="window.scrollTo({top:document.body.scrollHeight, behavior:'smooth'})">Book Service</button>
+                  <div style="display: flex; gap: 12px; margin-bottom: 12px;">
+                    <button class="btn outline" style="padding: 10px 24px; font-size: 14px; width: auto; border-radius: 8px; font-weight:600; color:#555; display:flex; align-items:center; gap:6px; background:transparent; border:1px solid rgba(0,0,0,0.1); cursor:pointer;"><span style="color:#aaa;">🤍</span> Save</button>
+                    <button class="btn outline" style="padding: 10px 24px; font-size: 14px; width: auto; border-radius: 8px; font-weight:600; color:#555; background:transparent; border:1px solid rgba(0,0,0,0.1); cursor:pointer;">Message</button>
+                    <button class="btn gradient" style="padding: 10px 24px; font-size: 14px; width: auto; border-radius: 8px; font-weight:600; background:#5A8C2B; color:white; border:none; box-shadow:0 4px 12px rgba(90,140,43,0.3); cursor:pointer;" onclick="window.scrollTo({top:document.body.scrollHeight, behavior:'smooth'})">Book Service</button>
                   </div>
                 </div>
                 
                 <!-- Worker Info Row -->
                 <div style="display: flex; flex-direction: column; gap: 6px;">
-                  <h1 style="margin: 0; font-size: 28px; display: flex; align-items: center; letter-spacing: -0.5px;">
+                  <h1 style="margin: 0; font-size: 28px; display: flex; align-items: center; letter-spacing: -0.5px; color:var(--text);">
                     ${w.name} ${verifiedBadge}
                   </h1>
                   <div style="font-size: 16px; font-weight:600; color: var(--text);">Top Rated ${w.service} Professional</div>
                   <div style="font-size: 14px; color: var(--muted); margin-top: 4px; display:flex; gap:12px; flex-wrap:wrap; align-items: center;">
-                    <span style="display:flex; align-items:center;">???? ${w.location || 'Local Area'}</span>
-                    <span style="opacity:0.4; font-size:10px;">???</span>
-                    <span style="display:flex; align-items:center;">???? ${w.experience} Years Experience</span>
-                    <span style="opacity:0.4; font-size:10px;">???</span>
-                    <span style="display:flex; align-items:center;">??? ${completedJobs} Jobs Completed</span>
-                    <span style="opacity:0.4; font-size:10px;">???</span>
-                    <span style="display:flex; align-items:center; color:#f59e0b; font-weight:600;">??? ${w.rating} Rating</span>
+                    <span style="display:flex; align-items:center; gap:4px;">📍 ${w.location || 'Local Area'}</span>
+                    <span style="opacity:0.4; font-size:10px;">•</span>
+                    <span style="display:flex; align-items:center; gap:4px;">💼 ${w.experience} yrs exp</span>
+                    <span style="opacity:0.4; font-size:10px;">•</span>
+                    <span style="display:flex; align-items:center; gap:4px;">✓ ${completedJobs} jobs</span>
+                    <span style="opacity:0.4; font-size:10px;">•</span>
+                    <span style="display:flex; align-items:center; color:#f59e0b; font-weight:600; gap:4px;">⭐ ${w.rating}</span>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- Horizontal Tabs -->
-            <div class="tabs-nav">
-              <button class="tab-btn active" data-target="about">About</button>
-              <button class="tab-btn" data-target="services">Services</button>
-              <button class="tab-btn" data-target="portfolio">Portfolio</button>
-              <button class="tab-btn" data-target="reviews">Reviews</button>
-              <button class="tab-btn" data-target="skills">Skills & Certifications</button>
+            <div class="tabs-nav" style="display:flex; gap:32px; border-bottom:1px solid var(--border); margin-bottom:24px; padding:0 16px;">
+              <button class="tab-btn active" data-target="about" style="background:none; border:none; border-bottom:3px solid transparent; padding:12px 0; font-size:16px; font-weight:600; color:#5A8C2B; cursor:pointer; border-bottom-color:#5A8C2B;">About</button>
+              <button class="tab-btn" data-target="services" style="background:none; border:none; border-bottom:3px solid transparent; padding:12px 0; font-size:16px; font-weight:600; color:var(--muted); cursor:pointer;">Services</button>
+              <button class="tab-btn" data-target="portfolio" style="background:none; border:none; border-bottom:3px solid transparent; padding:12px 0; font-size:16px; font-weight:600; color:var(--muted); cursor:pointer;">Portfolio</button>
+              <button class="tab-btn" data-target="reviews" style="background:none; border:none; border-bottom:3px solid transparent; padding:12px 0; font-size:16px; font-weight:600; color:var(--muted); cursor:pointer;">Reviews</button>
+              <button class="tab-btn" data-target="skills" style="background:none; border:none; border-bottom:3px solid transparent; padding:12px 0; font-size:16px; font-weight:600; color:var(--muted); cursor:pointer;">Skills</button>
             </div>
 
             <!-- TAB CONTENTS -->
@@ -363,9 +368,9 @@ if (location.pathname.endsWith('/profile.html') || location.pathname.endsWith('p
               <div style="padding: 32px 0;">
                 <h2 style="font-size: 24px; margin: 0 0 20px;">Professional Description</h2>
                 <div style="display: flex; gap: 12px; margin-bottom: 28px; flex-wrap: wrap;">
-                   ${w.rating >= 4.7 ? `<span style="background:linear-gradient(135deg, #fef3c7, #fde68a); color:#b45309; padding:8px 16px; border-radius:30px; font-size:14px; font-weight:700;">??? Top Rated Pro</span>` : ''}
-                   <span style="background:rgba(59,130,246,0.1); color:#2563eb; padding:8px 16px; border-radius:30px; font-size:14px; font-weight:600;">??? ${responseTime}</span>
-                   <span style="background:rgba(16,185,129,0.1); color:#10b981; padding:8px 16px; border-radius:30px; font-size:14px; font-weight:600;">??????? Verified Professional</span>
+                   ${w.rating >= 4.7 ? `<span style="background:linear-gradient(135deg, #fef3c7, #fde68a); color:#b45309; padding:8px 16px; border-radius:30px; font-size:14px; font-weight:700;">⭐ Top Rated Pro</span>` : ''}
+                   <span style="background:rgba(59,130,246,0.1); color:#2563eb; padding:8px 16px; border-radius:30px; font-size:14px; font-weight:600;">⚡ ${responseTime}</span>
+                   <span style="background:rgba(16,185,129,0.1); color:#10b981; padding:8px 16px; border-radius:30px; font-size:14px; font-weight:600;">🛡️ Verified Professional</span>
                 </div>
                 <p style="color: var(--text); line-height: 1.8; margin: 0; font-size: 16px;">
                   ${w.bio} I have built a strong reputation over my ${w.experience} years of experience in the field. My primary goal is ensuring customer satisfaction and long-lasting quality on every project. I prioritize clear communication, arriving on time, and delivering results that exceed expectations.
@@ -406,7 +411,7 @@ if (location.pathname.endsWith('/profile.html') || location.pathname.endsWith('p
                 <div style="display: flex; flex-direction: column; gap: 16px;">
                   ${certifications.map(c => `
                     <div style="display: flex; align-items: center; gap: 16px; border: 1px solid rgba(0,0,0,0.06); padding: 20px; border-radius: 12px; background:var(--surface)">
-                      <div style="font-size:20px; color:#10b981; background:rgba(16,185,129,0.1); width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center;">???</div>
+                      <div style="font-size:20px; color:#10b981; background:rgba(16,185,129,0.1); width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center;">✓</div>
                       <div style="font-weight: 600; font-size:16px; color:var(--text);">${c}</div>
                     </div>
                   `).join('')}
@@ -431,7 +436,7 @@ if (location.pathname.endsWith('/profile.html') || location.pathname.endsWith('p
               
               <div style="margin-bottom:28px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:20px;">
                  <span style="font-size:16px; font-weight:600; color:var(--muted)">Hourly Rate</span>
-                 <span style="font-size:28px; font-weight:800">$${w.price}</span>
+                 <span style="font-size:28px; font-weight:800">Rs${w.price}</span>
               </div>
               
               <div style="margin-bottom:28px;">
@@ -456,7 +461,7 @@ if (location.pathname.endsWith('/profile.html') || location.pathname.endsWith('p
                  <span style="font-size:14px; color:var(--text); font-weight:600; line-height:1.4">Covered by SkillBridge Guarantee.<br><span style="font-weight:normal;color:var(--muted)">Your satisfaction is strictly protected.</span></span>
               </div>
 
-              <button id="profile-book-confirm" class="btn gradient" style="width:100%; font-size:17px; padding:16px; border-radius:12px; box-shadow:0 8px 16px rgba(108,138,61,0.25);">Confirm Request</button>
+              <button id="profile-book-confirm" class="btn" style="width:100%; font-size:17px; padding:16px; border-radius:12px; font-weight:600; background:#5A8C2B; color:white; border:none; box-shadow:0 8px 16px rgba(90,140,43,0.25); cursor:pointer;">Confirm Request</button>
               <div id="bk-msg" style="margin-top:16px; color:#10b981; font-size:15px; text-align:center; font-weight:700; min-height:22px"></div>
               <div style="margin-top:14px; font-size:13px; color:var(--muted); text-align:center;">You won't be charged yet</div>
             </div>
@@ -468,14 +473,22 @@ if (location.pathname.endsWith('/profile.html') || location.pathname.endsWith('p
       // JS LOGIC AFTER DOM INJECTION
       // ------------------------------------
 
-      // Tabs Logic
+      // Tabs Logic (Updated for New Screenshot Layout)
       const tabs = container.querySelectorAll('.tab-btn');
       const contents = container.querySelectorAll('.tab-content');
       tabs.forEach(t => {
         t.addEventListener('click', () => {
-          tabs.forEach(btn => btn.classList.remove('active'));
+          tabs.forEach(btn => {
+            btn.classList.remove('active');
+            btn.style.color = 'var(--muted)';
+            btn.style.borderBottomColor = 'transparent';
+          });
           contents.forEach(c => c.classList.remove('active'));
+          
           t.classList.add('active');
+          t.style.color = '#5A8C2B';
+          t.style.borderBottomColor = '#5A8C2B';
+          
           container.querySelector('#tab-' + t.dataset.target).classList.add('active');
         });
       });

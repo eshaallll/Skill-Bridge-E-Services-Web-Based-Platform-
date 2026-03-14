@@ -1,47 +1,63 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Skill Bridge — Profile</title>
+
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="home.css">
   <link rel="stylesheet" href="dashboard.css">
 </head>
+
 <body>
+
   <!-- Mobile Sidebar Overlay -->
   <div class="mobile-overlay" id="mobile-overlay"></div>
 
-  <!-- TOP NAVIGATION BAR -->
+  <!-- TOP NAVBAR -->
   <header class="top-navbar" style="position: sticky; top: 0; z-index: 50;">
-    <!-- Left: Brand -->
+
+    <!-- Brand -->
     <a href="home.html" class="navbar-brand">
       <div class="logo-mark">SB</div>
       SkillBridge
     </a>
 
-    <!-- Center: Navigation Links -->
+    <!-- Navigation -->
     <nav class="navbar-links" id="navbar-links">
       <a class="nav-item" href="home.html">Home</a>
       <a class="nav-item" href="customer-dashboard.html">Overview</a>
       <a class="nav-item" href="listing.html">Categories</a>
       <a class="nav-item" href="customer-dashboard.html">My Bookings</a>
     </nav>
-    </div>
+
   </header>
-  <main style="max-width: 1440px; width: 100%; margin: 24px auto 64px auto; padding: 0 24px; min-height: 100vh;">
-    <!-- Filled dynamically by app.js -->
-    <div id="profile-container">
-      <!-- Loading State -->
-      <div style="padding:40px; text-align:center; width:100%; color:var(--muted);">
+
+
+  <!-- MAIN PAGE -->
+  <main style="max-width:1920px; width:100%; margin:24px auto 64px auto; padding:0 4%; min-height:100vh;">
+
+    <!-- JS will inject the profile UI here -->
+    <div id="profile-container" style="width:100%;">
+
+      <!-- Loading state -->
+      <div style="padding:40px; text-align:center; color:var(--muted);">
         Loading profile...
       </div>
+
     </div>
+
   </main>
 
-  <script src="data.js"></script>
-  <script src="app.js"></script>
-  <script src="dashboard.js"></script>
+
+  <!-- SCRIPTS -->
+  <script src="data.js?v=2"></script>
+  <script src="app_clean.js?v=2"></script>
+  <script src="dashboard.js?v=2"></script>
   <script src="footer.js"></script>
+
 </body>
+
 </html>
